@@ -7,10 +7,32 @@ import Swal from "sweetalert2";
 export default function Home() {
   const [error, setError] = useState("");
 
+  const HandleSignupSuccess = () => {
+    Swal.fire({
+      title: "Profile Created Successfully",
+      type: "success",
+      icon: "success",
+      text: "Now Make your daily notes with MyNotes",
+    });
+  };
+  const HandlSignupError = () => {
+    Swal.fire({
+      title: "Server Down Please Try again later",
+      type: "Error",
+      icon: "error",
+      text: "Sorry bro",
+    });
+  };
+
   async function handleSubmit(formData) {
     const result = await createBook(formData);
     if (result?.error) {
       setError(result.error);
+    }
+    if (result == 7) {
+      HandleSignupSuccess();
+    } else {
+      HandlSignupError();
     }
   }
 
@@ -68,6 +90,14 @@ export default function Home() {
     loginButton.addEventListener("click", handleClick);
     signup.addEventListener("click", handlesignup);
     loginpage.addEventListener("click", handlelogin);
+    document.addEventListener("click", () => {
+      let value = loginpages.style.transform;
+      if (value == "translateY(0px)") {
+        loginpages.style.transform = "translateY(-200%)";
+      } else {
+        loginpages.style.transform = "translateY(0px)";
+      }
+    });
     return () => {
       loginButton.removeEventListener("click", handleClick);
     };

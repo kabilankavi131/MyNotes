@@ -14,13 +14,10 @@ function HandleClick() {
 }
 export async function LoginBook(formData) {
   const { name, password } = Object.fromEntries(formData);
-  const passwordExists = await client.hExists(`notes:${name}`, "password");
+  const passwordExists = await client.hExists(`mynotes:${name}`, "password");
   if (passwordExists) {
-    await client.set("Work", "Mara");
-    // Display SweetAlert on the client-side
+    console.log(password);
     return 7;
-  } else {
-    await client.set("No", "Mara");
   }
   // Handle redirecting in your component or page
   redirect("/");
