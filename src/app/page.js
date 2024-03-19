@@ -90,14 +90,6 @@ export default function Home() {
     loginButton.addEventListener("click", handleClick);
     signup.addEventListener("click", handlesignup);
     loginpage.addEventListener("click", handlelogin);
-    document.addEventListener("click", () => {
-      let value = loginpages.style.transform;
-      if (value == "translateY(0px)") {
-        loginpages.style.transform = "translateY(-200%)";
-      } else {
-        loginpages.style.transform = "translateY(0px)";
-      }
-    });
     return () => {
       loginButton.removeEventListener("click", handleClick);
     };
