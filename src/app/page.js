@@ -7,35 +7,32 @@ import Swal from "sweetalert2";
 export default function Home() {
   const [error, setError] = useState("");
 
-  const HandleSignupSuccess = () => {
-    Swal.fire({
-      title: "Profile Created Successfully",
-      type: "success",
-      icon: "success",
-      text: "Now Make your daily notes with MyNotes",
-    });
-  };
-  const HandlSignupError = () => {
-    Swal.fire({
-      title: "Server Down Please Try again later",
-      type: "Error",
-      icon: "error",
-      text: "Sorry bro",
-    });
-  };
-
   async function handleSubmit(formData) {
     const result = await createBook(formData);
-    if (result?.error) {
-      setError(result.error);
-    }
-    if (result == 7) {
+    if (result) {
       HandleSignupSuccess();
-    } else {
-      HandlSignupError();
+    }
+    else {
+      HandleSignupError()
     }
   }
 
+  const HandleSignupSuccess = () => {
+    Swal.fire({
+      title: "Signup Successfull",
+      type: "success",
+      icon: "success",
+      text: "Enjoy (My Notes)",
+    });
+  };
+  const HandleSignupError = () => {
+    Swal.fire({
+      title: "Try Again",
+      type: "Error",
+      icon: "error",
+      text: "Unexpected Error",
+    });
+  };
   const HandleSuccess = () => {
     Swal.fire({
       title: "Login Successfull",
@@ -57,7 +54,7 @@ export default function Home() {
     if (result?.error) {
       setError(result.error);
     }
-    if (result == 7) {
+    if (result === 7) {
       HandleSuccess();
     } else {
       HandlError();
