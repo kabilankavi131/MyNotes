@@ -9,13 +9,25 @@ export default function Home() {
 
   async function handleSubmit(formData) {
     const result = await createBook(formData);
-    if (result) {
+    if (result === 1) {
       HandleSignupSuccess();
+    }
+    else if (result === -1) {
+      HandleExistingUser()
     }
     else {
       HandleSignupError()
     }
   }
+
+  const HandleExistingUser = () => {
+    Swal.fire({
+      title: "Username Already Exists",
+      type: "Error",
+      icon: "info",
+      text: "Use Different Name",
+    });
+  };
 
   const HandleSignupSuccess = () => {
     Swal.fire({
